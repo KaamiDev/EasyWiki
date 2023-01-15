@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyWiki - Wikipedia Made Easy</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div class="header-container">
+        <img src="logo.png" alt="EasyWiki Logo" class="header-logo-image" />
+        <img src="logo-text.svg" alt="EasyWiki Logo" class="header-logo-text" />
+        <h2 class="header-subtext">Wikipedia Made Easy.</h1>
+    </div>
+
+    <form method="POST" id="wiki-form" onsubmit="changeText()" action="/result">
+        <div class="input-container">
+            <input placeholder="https://en.wikipedia.org/wiki/__" name="w_link" class="link-input" type="url" required />
+            <button type="submit" id="submit-button" class="simplify-button">Simplify Article</button>
+        </div>
+        <div class="radio-input-container">
+            <div class="radio-container-1">
+                <input id="simple_summary" name="s_type" type="radio" value="simple_summary" checked/>
+                <label for="simple_summary">Simplified Summary</label><br>
+            </div>
+            <div class="radio-container-2">
+                <input id="explained_like_5" name="s_type" type="radio" value="explained_like_5"/>
+                <label for="explained_like_5">Explained Like I'm 5</label><br>
+            </div>
+        </div>
+    </form>
+        
+    <div class="info-container info-container-1">
+        <h2 class="info-header info-header-1">What does it do?</h2>
+        <p class="info-paragraph info-paragraph-1">This tool is designed to make Wikipedia articles more accessible to a wider audience. It does this by analyzing the text of Wikipedia articles and simplifying complex phrases and vocabulary, making it easier for readers to understand the key concepts and ideas presented in the article.</p>
+    </div>
+
+    <div class="info-container info-container-2">
+        <h2 class="info-header info-header-2">How does it work?</h2>
+        <p class="info-paragraph info-paragraph-2">The tool utilizes the advanced language capabilities of OpenAI GPT-3 to analyze the text of Wikipedia articles and identify areas that may be difficult for some readers to understand. This could include complex vocabulary, technical terms, or long sentences with multiple clauses.<br /><br />Once these complex areas are identified, the tool uses GPT-3’s natural language generation capabilities to rephrase these sections in simpler, more accessible language. This process is done in a way that preserves the integrity of the original content and meaning, while making it easier for readers with varying backgrounds and reading abilities to understand.</p>
+    </div>
+
+    <%- include('footer'); -%>
+
+    <script>
+        function changeText() {
+            document.getElementById('submit-button').innerText = "Simplifying.."
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyWiki - Wikipedia Made Easy</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div class="header-container">
+        <img src="logo.png" alt="EasyWiki Logo" class="header-logo-image" />
+        <img src="logo-text.svg" alt="EasyWiki Logo" class="header-logo-text" />
+        <h2 class="header-subtext">Wikipedia Made Easy.</h1>
+    </div>
+
+    <form method="POST" id="wiki-form" onsubmit="changeText()" action="/result">
+        <div class="input-container">
+            <input placeholder="https://en.wikipedia.org/wiki/__" name="w_link" value="<%= wiki_link %>" class="link-input" type="url" required />
+            <button type="submit" id="submit-button" class="simplify-button">Simplify Article</button>
+        </div>
+        <div class="radio-input-container">
+            <div class="radio-container-1">
+                <input id="simple_summary" name="s_type" type="radio" value="simple_summary" <%- content_type === 'simple_summary' ? 'checked' : '' %>/>
+                <label for="simple_summary">Simplified Summary</label><br>
+            </div>
+            <div class="radio-container-2">
+                <input id="explained_like_5" name="s_type" type="radio" value="explained_like_5" <%- content_type === 'explained_like_5' ? 'checked' : '' %>/>
+                <label for="explained_like_5">Explained Like I'm 5</label><br>
+            </div>
+        </div>
+    </form>
+
+    <div class="main-body-container">
+        <div class="content-container">
+            <div class="content-header">
+                <div class="content-header-title">
+                    <h1 class="content-name-title"><%= content_title %></h1>
+                    <% if(content_type === 'simple_summary') { %>
+                        <h3 class="content-name-type">Simplified Summary</h3>
+                    <% } %>
+                    <% if(content_type === 'explained_like_5') { %>
+                        <h3 class="content-name-type">Explained Like I'm 5</h3>
+                    <% } %>
+                    
+                </div>
+                <div class="content-header-links">
+                    <a class="content-link" target="_blank" href="<%= wiki_link %>">
+                        <img class="content-icon" src="link.svg" alt="link icon">
+                        <%= wiki_link %>
+                    </a>
+                    <a class="content-link" href="/">
+                        <img class="content-icon" src="arrow.svg" alt="link icon">
+                        Home
+                    </a>
+    
+                </div>
+            </div>
+            <div class="content-body"><%- content_description %></div>
+        </div>
+    </div>
+
+    <%- include('footer'); -%>
+
+    <script>
+        function changeText() {
+            document.getElementById('submit-button').innerText = "Simplifying.."
+        }
+    </script>
+</body>
+</html>
